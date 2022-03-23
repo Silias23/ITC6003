@@ -7,18 +7,22 @@ Clustering dataset retrieved from: https://archive.ics.uci.edu/ml/datasets/Whole
 Classification dataset provided by class instructor
 
 Methodologies presented:
+
 Clustering:
-  Kmeans clustering
-  Boxplot cluster characterization
-  Decision Tree cluster characterization
+
+  Kmeans clustering,
+  Boxplot cluster characterization,
+  Decision Tree cluster characterization,
   Hierarchical clustering
   
 Classification:
-  Decision Tree
-  Naive Bayes
-  Nearest Neighbours
+
+  Decision Tree,
+  Naive Bayes,
+  Nearest Neighbours,
   Support Vector Machine
   
 Unlabeled Classification:
+
   Label Propagation
   
