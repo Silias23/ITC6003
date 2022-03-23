@@ -28,99 +28,9 @@ from sklearn.metrics import accuracy_score
 
 
 
-# def kmeansClustering (x):
-#     inertiasAll=[]
-#     silhouettesAll=[]
-#     clustersAll=[]
-#     maxClusters=15
-
-#     for n in range(2,maxClusters):
-#         #print 'Clustering for n=',n
-#         kmeans = KMeans(n_clusters=n, init = 'k-means++', random_state=42)
-#         kmeans.fit(x)
-#         y_kmeans = kmeans.predict(x)
-
-#         #get cluster centers
-#         kmeans.cluster_centers_
-
-#         #evalute
-#         #print 'inertia=',kmeans.inertia_
-        
-#         silhouette_values = silhouette_samples(x, y_kmeans)
-#         #print 'silhouette=', np.mean(silhouette_values)
-    
-#         inertiasAll.append(kmeans.inertia_)
-#         silhouettesAll.append(np.mean(silhouette_values))    
-#         clustersAll.append(n)
-
-#     return  clustersAll, silhouettesAll, inertiasAll
-
-
-
 
 data = pd.read_csv("ITC6003Project/data.csv", delimiter=",")
 
-# x = data.iloc[:,2:8]
-
-# x1 = preprocessing.scale(x)
-
-
-# clustersAll2, silhouette_values2, inertiasAll2 = kmeansClustering(x1)
-
-# plt.figure(1)
-
-# #silhouette: bigger values are better
-
-
-# plt.figure(2)
-# plt.title('kmeans:')
-# plt.xlabel('Number of clusters')
-# plt.ylabel('Silhouette Values')
-# plt.plot(clustersAll2, silhouette_values2,'*-')
-# plt.show()
-
-
-
-# #inertia
-# plt.figure(2)
-# plt.title('kmeans:')
-# plt.xlabel('Number of clusters')
-# plt.ylabel('Inertia')
-# plt.plot(clustersAll2, inertiasAll2,'*-')
-# plt.show()
-
-
-
-
-
-
-
-
-
-
-
-
-# print()
-
-# https://www.kaggle.com/berkayalan/unsupervised-learning-clustering-complete-guide
-# https://www.kaggle.com/anjanisona/wholesale-customers-eda-rfecv-kmeans-pca-xg
-
-
-# data_scaled = normalize(data)
-# data_scaled = pd.DataFrame(data_scaled, columns=data.columns)
-# print(data_scaled.head())
-# plt.figure(figsize=(10, 7))  
-# plt.title("Dendrograms")  
-# dend = shc.dendrogram(shc.linkage(data_scaled, method='ward'))
-# plt.figure(figsize=(10, 7))  
-
-# plt.show()
-
-
-
-
-
-#actual Code
 
 data['Channel'].value_counts()
 data['Region'].value_counts()
@@ -184,6 +94,7 @@ plt.xlabel('Number of clusters')
 
 
 opt_clusters = 6
+
 kmeans = KMeans(n_clusters=opt_clusters)
 kmeans.fit(X)
 print(kmeans.cluster_centers_)
@@ -200,8 +111,6 @@ for i in range(opt_clusters):
 idxCluster = []
 for i in range(opt_clusters):
     idxCluster.append([])
-
-for i in range(opt_clusters):
     idxCluster[i] = np.where(kmeans.labels_==i)
 
 for i in range(opt_clusters):
@@ -210,7 +119,7 @@ for i in range(opt_clusters):
     # x-labels are turned 90 degrees
     plt.xticks(rotation=90)
     plt.boxplot(X[idxCluster[i]],labels=list(data.columns))
-    #plt.show()
+    plt.show()
 
 
 #insert the clusters as class labels to prepare for decision tree analysis
@@ -225,7 +134,7 @@ x1 = preprocessing.scale(x)
 #!!!! play with max_depth
 clf = tree.DecisionTreeClassifier(criterion="gini", random_state=0, max_depth= 4)
 
-# fit and train the model with all the data - no need to split and test/train for accuracy - too few datapoints
+# fit and train the model with all the data - no need to split and test/train for accuracy - we already know the results and just want to get the logic
 clf = clf.fit(x1, y)
 
 #run prediction
@@ -259,4 +168,4 @@ print('Number of Leaves=',clf.get_n_leaves())
 # instead of using MinMax and preprocessing scale, find an other way to normalize the dataset in order to be able to produce a decision tree that
 #shows actual customer data thresholds and not downscaled numbers
 
-#
+#hierarchical clustering
